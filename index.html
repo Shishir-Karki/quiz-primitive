@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="quiz.css">
+  <title>Awesome Quiz Application</title>
+</head>
+<body>
+  <div class="quiz-container">
+    <header>
+      <h1>Awesome Quiz Application</h1>
+      <div class="timer-container">
+        <span>Time Left</span>
+        <span id="timer">15</span>
+      </div>
+    </header>
+    <div class="question-container">
+      <div id="questionNumber">1 of 5 Questions</div>
+      <h2 id="ques">Question text goes here</h2>
+    </div>
+    <div id="opt" class="options-container"></div>
+    <div class="footer">
+      <button id="skpBtn" onclick="skipQuestion()">Skip</button>
+      <button id="btn" onclick="nextQuestion()">Next Que</button>
+      <div id="score" class="score-container"></div>
+    </div>
+  </div>
+  <script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+body {
+  background-color: #1d1b31;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #f1f1f1;
+}
+
+.quiz-container {
+  background-color: #2b2d42;
+  border-radius: 10px;
+  width: 400px;
+  padding: 40px 20px; /* Increased top padding for spacing */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #f1f1f1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.timer-container {
+  background-color: #6a0572;
+  color: #f1f1f1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.question-container {
+  margin-bottom: 20px;
+}
+
+#questionNumber {
+  font-size: 14px;
+  color: #c1c1c1;
+}
+
+#ques {
+  font-size: 18px;
+  color: #e4e4e4;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.options-container div {
+  background-color: #353546;
+  color: #d1d1d1;
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.options-container div:hover {
+  background-color: #5a5a7a;
+}
+
+.options-container div.correct {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: #fff;
+}
+
+.options-container div.incorrect {
+  background-color: #e53935;
+  border-color: #e53935;
+  color: #fff;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  background-color: #6a0572;
+  color: #f1f1f1;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #862992;
+}
+
+#score {
+  padding-top: 10px;
+  font-size: 16px;
+  color: #f1f1f1;
+  margin-top: 20px;
+}
+
+#timer {
+  font-weight: bold;
+}
+
+.results-summary {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.result-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.result-item p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.answer {
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.correct-answer {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.incorrect-answer {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.answer.correct {
+  background-color: #dff0d8;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
