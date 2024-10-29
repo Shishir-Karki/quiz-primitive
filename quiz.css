@@ -16,7 +16,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: Arial, sans-serif;
   color: #f1f1f1;
   text-align: center;
 }
@@ -189,19 +188,6 @@ button:hover {
   border: 1px solid #4caf50;
 }
 
-/* Unchanged styles for layout and quiz elements */
-
-.start-container {
-  background-color: #1d1b31;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: #f1f1f1;
-  text-align: center;
-}
-
 .start-container button, .restart-button {
   background-color: #6a0572;
   color: #f1f1f1;
@@ -226,3 +212,34 @@ button:hover {
   margin-top: 20px;
 }
 
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .quiz-container {
+    width: 100%;
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  #ques {
+    font-size: 16px;
+  }
+
+  header h1, #questionNumber, .timer-container, #score {
+    font-size: 14px;
+  }
+
+  .options-container div {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .start-container h1 {
+    font-size: 20px;
+  }
+
+  .start-container button, .restart-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
