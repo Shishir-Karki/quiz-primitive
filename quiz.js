@@ -37,11 +37,14 @@ let timeLeft = 15;
 let timer;
 let userAnswers = [];
 
-window.onload = () => {
+function startQuiz() {
+  document.getElementById("startPage").style.display = "none";
+  document.getElementById("quizContainer").style.display = "block";
+  resetQuizState(); // Reset quiz state and UI
   loadQuestion();
   startTimer();
-};
-
+}
+// Loads the current question and options into the quiz container
 function loadQuestion() {
   const questionElement = document.getElementById("ques");
   const optionsContainer = document.getElementById("opt");
@@ -63,6 +66,7 @@ function loadQuestion() {
   resetTimer();
 }
 
+// Handles selection of an option, recording answer and moving to next question
 function selectOption(selectedDiv) {
   const answerValue = selectedDiv.textContent;
   const correctAnswer = Questions[currentQuestion].correct_answer;
@@ -80,6 +84,7 @@ function selectOption(selectedDiv) {
   setTimeout(nextQuestion, 1000);
 }
 
+// Skips the current question and moves to the next one
 function skipQuestion() {
   userAnswers.push({
     question: Questions[currentQuestion].question,
@@ -90,6 +95,7 @@ function skipQuestion() {
   nextQuestion();
 }
 
+// Advances to the next question or shows results if it's the last question
 function nextQuestion() {
   currentQuestion++;
   if (currentQuestion < Questions.length) {
@@ -100,6 +106,7 @@ function nextQuestion() {
   }
 }
 
+// Displays the quiz results with correct answers and the user's answers
 function showResults() {
   document.querySelector(".timer-container").style.display = "none"; 
   document.querySelector(".question-container").innerHTML = `<h2>Your Score: ${score}/${Questions.length}</h2>`;
@@ -107,49 +114,34 @@ function showResults() {
   document.querySelector(".footer").style.display = "none";
 
   const resultsContainer = document.createElement("div");
-  resultsContainer.className = "results-summary";
+  resultsContainer.classList.add("results-summary");
 
   userAnswers.forEach((answer, index) => {
-    const resultDiv = document.createElement("div");
-    resultDiv.className = "result-item";
+    const resultItem = document.createElement("div");
+    resultItem.className = "result-item";
 
-    const selectedClass = answer.is_correct ? "correct-answer" : "incorrect-answer";
-
-    resultDiv.innerHTML = `
-      <p><strong>${answer.question}</strong></p>
-      <div class="answer ${selectedClass}">Selected: ${answer.user_answer}</div>
-      <div class="answer correct">Correct: ${answer.correct_answer}</div>
-      <hr>
+    resultItem.innerHTML = `
+      <p><strong>Q${index + 1}:</strong> ${answer.question}</p>
+      <p class="answer ${answer.is_correct ? 'correct-answer' : 'incorrect-answer'}">${answer.user_answer}</p>
+      ${!answer.is_correct ? `<p class="answer correct">Correct: ${answer.correct_answer}</p>` : ''}
     `;
-
-    resultsContainer.appendChild(resultDiv);
+    resultsContainer.appendChild(resultItem);
   });
 
-  document.querySelector(".question-container").appendChild(resultsContainer);
-  document.getElementById("score").innerHTML = `<p>3 of ${Questions.length} Questions</p>`;
-  
   const restartButton = document.createElement("button");
   restartButton.textContent = "Restart Quiz";
+  restartButton.className = "restart-button";
   restartButton.onclick = restartQuiz;
-  document.querySelector(".question-container").appendChild(restartButton);
+
+  resultsContainer.appendChild(restartButton);
+  document.querySelector(".question-container").appendChild(resultsContainer);
 }
 
-
-
-function resetOptionStyles() {
-  document.querySelectorAll(".option").forEach(option => {
-    option.classList.remove("disabled");
-  });
-}
-
+// Starts the timer and skips the question when time is up
 function startTimer() {
-  const timerElement = document.getElementById("timer");
-  timerElement.textContent = String(timeLeft).padStart(2, "0");
-
   timer = setInterval(() => {
     timeLeft--;
-    timerElement.textContent = String(timeLeft).padStart(2, "0");
-
+    document.getElementById("timer").textContent = timeLeft;
     if (timeLeft <= 0) {
       clearInterval(timer);
       skipQuestion();
@@ -157,8 +149,42 @@ function startTimer() {
   }, 1000);
 }
 
+// Resets the timer to the initial time
 function resetTimer() {
-  clearInterval(timer);
   timeLeft = 15;
-  startTimer();
+  document.getElementById("timer").textContent = timeLeft;
+}
+
+// Resets styles for options, clearing any correct/incorrect styling
+function resetOptionStyles() {
+  document.querySelectorAll(".options-container div").forEach(div => div.classList.remove("correct", "incorrect", "disabled"));
+}
+
+// Resets the quiz state, preparing for a new quiz session
+function restartQuiz() {
+  document.getElementById("quizContainer").style.display = "none";
+  document.getElementById("startPage").style.display = "flex";
+}
+
+function resetQuizState() {
+  currentQuestion = 0;
+  score = 0;
+  userAnswers = [];
+
+  // Clear any previous results or answer styling
+  document.getElementById("opt").innerHTML = "";
+  document.getElementById("score").innerHTML = "";
+  document.querySelector(".question-container").innerHTML = `
+    <div id="questionNumber">1 of ${Questions.length} Questions</div>
+    <h2 id="ques">Question text goes here</h2>
+  `;
+  
+  document.querySelector(".timer-container").style.display = "flex";
+  document.getElementById("opt").style.display = "block";
+  document.querySelector(".footer").style.display = "flex";
+  
+  document.getElementById("score").innerHTML = ""; // Clear score
+  document.querySelector(".results-summary")?.remove(); // Remove results summary if exists
+
+  resetTimer();
 }

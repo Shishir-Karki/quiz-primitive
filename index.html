@@ -7,7 +7,12 @@
   <title>Awesome Quiz Application</title>
 </head>
 <body>
-  <div class="quiz-container">
+  <div id="startPage" class="start-container">
+    <h1>Welcome to the Awesome Quiz</h1>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <div id="quizContainer" class="quiz-container" style="display: none;">
     <header>
       <h1>Awesome Quiz Application</h1>
       <div class="timer-container">
@@ -25,6 +30,7 @@
       <div id="score" class="score-container"></div>
     </div>
   </div>
+
   <script src="quiz.js"></script>
 </body>
 </html>
